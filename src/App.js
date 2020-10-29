@@ -14,7 +14,6 @@ class App extends Component {
           <Route exact path='/dashboard' component={ Dashboard }/>
           <Route exact path='/manageOwners' component={ ManageOwners }/>
         </Router>
-        <p>Starting from scratch :(</p>
       </div>
     );
   }

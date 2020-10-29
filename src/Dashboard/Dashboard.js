@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DashboardItem from '../DashboardItem/DashboardItem';
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
 class Dashboard extends Component {
   state = {
     heading: 'Class Component',
@@ -21,7 +18,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log('this.props is:', this.props )
+    // console.log('this.props is:', this.props )
     return (
       <div>
         <h2>'spooooooky'</h2>
@@ -34,6 +31,14 @@ class Dashboard extends Component {
             <th>Checked in</th>
             <th>Actions</th>
           </thead>
+          <tbody>
+            {/* we map here */}
+            {this.props.pets.map((pet, i) => 
+              <tr>
+                <DashboardItem key={i} pet={pet}/>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     );
