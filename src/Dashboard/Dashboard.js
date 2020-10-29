@@ -33,10 +33,8 @@ class Dashboard extends Component {
           </thead>
           <tbody>
             {/* we map here */}
-            {this.props.pets.map((pet, i) => 
-              <tr>
-                <DashboardItem key={i} pet={pet}/>
-              </tr>
+            {this.props.pets.map((pet, i) =>  
+              <DashboardItem key={i} pet={pet}/>
             )}
           </tbody>
         </table>
