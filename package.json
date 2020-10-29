@@ -1,5 +1,5 @@
 {
-  "name": "pet-hotel-react-python-server",
+  "name": "group_pet_hotel_client",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
