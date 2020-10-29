@@ -19,6 +19,15 @@ const petReducer = (state = [], action) => {
   };
 };
 
+const ownersReducer = (state = [], action) => {
+    switch (action.type) {
+      case 'SET_OWNERS':
+        return action.payload;
+      default:
+        return state;
+    };
+  };
+
 function* fetchPetsSaga(){
     console.log( 'in fetchPetsSaga' )
     let response = yield axios({
@@ -30,10 +39,21 @@ function* fetchPetsSaga(){
     yield put({type: 'SET_PETS', payload: response.data})
 }
 
+function* fetchOwnersSaga(){
+    console.log( 'in fetchOwnersSaga' )
+    let response = yield axios({
+        method: 'GET',
+        url: '/owners'
+    })
+    console.log( 'response is:', response.data )
+    yield put({type: 'SET_OWNERS', payload: response.data})
+}
+
 
 // Generator function to listen for specific strings to run sagas. 
 function* sagaListener (){
-    yield takeEvery( 'FETCH_PETS', fetchPetsSaga )
+    yield takeEvery( 'FETCH_PETS', fetchPetsSaga );
+    yield takeEvery( 'FETCH_OWNERS', fetchOwnersSaga )
 }
 
 // Create sagaMiddleware
@@ -42,6 +62,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   combineReducers({ 
     petReducer, 
+    ownersReducer
   }),
   applyMiddleware(sagaMiddleware)
 );

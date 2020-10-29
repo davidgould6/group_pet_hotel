@@ -14,7 +14,7 @@ class DashboardItem extends Component {
   }
 
   render() {
-    console.log('this.props for dashboarditem.js:', this.props)
+    // console.log('this.props for dashboarditem.js:', this.props)
     return (
       <tr>
         <td>{this.props.pet.ownerName}</td>
