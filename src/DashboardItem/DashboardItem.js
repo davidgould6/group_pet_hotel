@@ -20,13 +20,19 @@ class DashboardItem extends Component {
 		this.setState({
 			isCheckedIn: !this.state.isCheckedIn,
 		});
-		let objectToSend = {
-			isCheckedIn: this.state.isCheckedIn,
-			id: this.props.pet.id,
-		};
 		this.props.dispatch({
-			type: "UPDATE_STATUS",
-			payload: objectToSend,
+			type: "UPDATE_FALSE",
+			payload: this.props.pet.id,
+		});
+	};
+
+	heckIn = () => {
+		this.setState({
+			isCheckedIn: !this.state.isCheckedIn,
+		});
+		this.props.dispatch({
+			type: "UPDATE_TRUE",
+			payload: this.props.pet.id
 		});
 	};
 
@@ -45,7 +51,7 @@ class DashboardItem extends Component {
 					{this.state.isCheckedIn ? (
 						<button onClick={this.heckOut}>Check Out</button>
 					) : (
-						<button onClick={this.heckOut}>Check</button>
+						<button onClick={this.heckIn}>Check</button>
 					)}
 				</td>
 			</tr>

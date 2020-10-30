@@ -48,25 +48,40 @@ function* fetchOwnersSaga() {
 	yield put({ type: "SET_OWNERS", payload: response.data });
 }
 
-function* updateStatusSaga(action) {
-	console.log("in updateStatusSaga", "this is action.payload:", action.payload);
-	let isCheckedIn = action.payload.isCheckedIn;
-	let id = action.payload.id;
+function* updateTrueSaga(action) {
+	console.log("in updateTrueSaga", "this is action.payload:", action.payload);
+	// let isCheckedIn = action.payload.isCheckedIn;
+	let id = action.payload;
 	let response = yield axios({
 		method: "PUT",
 		url: `/pets/${id}`,
-		data: {"isCheckedIn": `${isCheckedIn}` },
+		data: {"isCheckedIn": "true" },
 	});
-	console.log("response is:", action.payload);
-	console.log("ischeckedin is:", isCheckedIn);
-	// yield put({ type: "SET_OWNERS", payload: response.data });
+	// console.log("response is:", action.payload);
+	// console.log("ischeckedin is:", isCheckedIn.toString());
+	yield put({ type: "FETCH_PETS" });
+}
+
+function* updateFalseSaga(action) {
+	console.log("in updateFalseSaga", "this is action.payload:", action.payload);
+	// let isCheckedIn = action.payload.isCheckedIn;
+	let id = action.payload;
+	let response = yield axios({
+		method: "PUT",
+		url: `/pets/${id}`,
+		data: {"isCheckedIn": "false" },
+	});
+	// console.log("response is:", action.payload);
+	// console.log("ischeckedin is:", isCheckedIn.toString());
+	yield put({ type: "FETCH_PETS" });
 }
 
 // Generator function to listen for specific strings to run sagas.
 function* sagaListener() {
 	yield takeEvery("FETCH_PETS", fetchPetsSaga);
 	yield takeEvery("FETCH_OWNERS", fetchOwnersSaga);
-	yield takeEvery("UPDATE_STATUS", updateStatusSaga);
+	yield takeEvery("UPDATE_FALSE", updateFalseSaga);
+	yield takeEvery("UPDATE_TRUE", updateTrueSaga);
 }
 
 // Create sagaMiddleware
