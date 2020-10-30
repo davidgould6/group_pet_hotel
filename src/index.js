@@ -55,7 +55,7 @@ function* updateStatusSaga(action) {
 	let response = yield axios({
 		method: "PUT",
 		url: `/pets/${id}`,
-		data: action.payload.isCheckedIn,
+		data: {"isCheckedIn": `${isCheckedIn}` },
 	});
 	console.log("response is:", action.payload);
 	console.log("ischeckedin is:", isCheckedIn);
